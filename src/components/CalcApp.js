@@ -9,13 +9,15 @@ class CalcApp extends React.Component {
       val: 0,
       num: '',
       oper: '',
+      lnum: '',
+      loper: '',
     };
     this.numPress = this.numPress.bind(this);
     this.operPress = this.operPress.bind(this);
   }
 
   resetState() {
-    this.setState({ val: 0, num: '', oper: '' });
+    this.setState({ val: 0, oper: '', lnum: '', loper: '' });
   }
 
   numPress(number) {
@@ -24,31 +26,59 @@ class CalcApp extends React.Component {
   }
 
   operPress(operator) {
+    if (operator === '=' && this.state.oper !== '=' && this.state.num !== '') {
+      this.state.lnum = this.state.num;
+      this.state.loper = this.state.oper;
+      this.setState({ lnum: this.state.lnum, loper: this.state.loper });
+    } else if (operator !== '=' && this.state.oper === '=') {
+      this.state.lnum = this.state.val.toString();
+      this.state.loper = operator;
+      this.setState({ lnum: this.state.lnum, loper: this.state.loper });
+    }
     if (this.state.num === '') {
-      this.state.oper = operator;
-      this.setState({ oper: this.state.oper });
+      if (operator === '=') {
+        if (this.state.loper === '+') {
+          this.state.val += Number(this.state.lnum);
+        } else if (this.state.loper === '-') {
+          this.state.val -= Number(this.state.lnum);
+        } else if (this.state.loper === 'x') {
+          this.state.val *= Number(this.state.lnum);
+        } else if (this.state.loper === '÷') {
+          this.state.val /= Number(this.state.lnum);
+        }
+        this.setState({ val: this.state.val });
+      } else {
+        this.state.oper = operator;
+        this.setState({ oper: this.state.oper });
+      }
     } else if (this.state.oper === '' || (this.state.oper === '=' && this.state.num !== '')) {
       this.state.val = Number(this.state.num);
       this.state.num = '';
-      this.setState({ val: this.state.val, num: this.state.num, oper: operator });
+      this.state.oper = operator;
+      this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
     } else if (this.state.oper === '+') {
       this.state.val += Number(this.state.num);
       this.state.num = '';
-      this.setState({ val: this.state.val, num: this.state.num, oper: operator });
+      this.state.oper = operator;
+      this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
     } else if (this.state.oper === '-') {
       this.state.val -= Number(this.state.num);
       this.state.num = '';
-      this.setState({ val: this.state.val, num: this.state.num, oper: operator });
+      this.state.oper = operator;
+      this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
     } else if (this.state.oper === 'x') {
       this.state.val *= Number(this.state.num);
       this.state.num = '';
-      this.setState({ val: this.state.val, num: this.state.num, oper: operator });
+      this.state.oper = operator;
+      this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
     } else if (this.state.oper === '÷') {
       this.state.val /= Number(this.state.num);
       this.state.num = '';
-      this.setState({ val: this.state.val, num: this.state.num, oper: operator });
+      this.state.oper = operator;
+      this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
     } else if (this.state.oper === '=' && this.state.num === '') {
-      this.setState({ val: this.state.val, num: this.state.num, oper: operator });
+      this.state.oper = operator;
+      this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
     }
   }
 
