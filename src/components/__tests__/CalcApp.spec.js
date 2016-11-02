@@ -105,4 +105,3 @@ it('AC should clear state', () => {
   expect(app.state()).toEqual(initialState);
 });
 
-

@@ -11,7 +11,7 @@ const CalcButton = (props) => {
   return (
     <button
       className={`calc-btn ${extraClass}`}
-      onClick={onClick}
+      onClick={() => onClick(className, children)}
     >
       {children}
     </button>
