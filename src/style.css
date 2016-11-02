@@ -29,7 +29,7 @@
   display: inline-block;
   text-align: center;
   vertical-align: top;
-  width: 60px;
+  width: 62px;
   height: 60px;
   line-height: 60px;
   border: 1px solid #a08c88;
@@ -37,7 +37,8 @@
 }
 
 .bigger-btn {
-  width: 122px;
+  width: 124px;
+  background-color: #d2d3d5;
 }
 
 .calc-number {

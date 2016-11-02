@@ -4,7 +4,7 @@
   "description": "In-class practice. Using webpack, babel, react",
   "scripts": {
     "test": "jest",
-    "lint": "eslint src",
+    "lint": "eslint src --fix",
     "build": "webpack --config webpack.config.js",
     "start": "serve ."
   },
