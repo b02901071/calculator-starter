@@ -76,9 +76,6 @@ class CalcApp extends React.Component {
       this.state.num = '';
       this.state.oper = operator;
       this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
-    } else if (this.state.oper === '=' && this.state.num === '') {
-      this.state.oper = operator;
-      this.setState({ val: this.state.val, num: this.state.num, oper: this.state.oper });
     }
   }
 
